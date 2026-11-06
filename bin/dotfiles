@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+# dotfiles save    -> copia as configs do sistema para o repo, commita e dá push
+# dotfiles restore -> devolve as configs do repo para o sistema (backup antes)
+# dotfiles diff    -> mostra o que mudou no sistema em relação ao repo
+set -euo pipefail
+REPO="$HOME/dotfiles"; HOME_DIR="$REPO/home"
+PATHS=(
+  .config/hypr .config/omarchy/shell.json .config/omarchy/shell.toml
+  .config/omarchy/hooks .config/omarchy/extensions .config/omarchy/branding
+  .config/foot .config/ghostty .config/kitty .config/alacritty
+  .config/starship.toml .config/btop/btop.conf .config/mimeapps.list .bashrc
+)
+EXCL=(--exclude='*.bak*' --exclude='.git')
+cmd="${1:-diff}"
+case "$cmd" in
+  save)
+    for p in "${PATHS[@]}"; do [ -e "$HOME/$p" ] || continue
+      mkdir -p "$HOME_DIR/$(dirname "$p")"
+      rsync -a --delete "${EXCL[@]}" "$HOME/$p" "$HOME_DIR/$(dirname "$p")/"; done
+    cd "$REPO"; git add home bin README.md .gitignore 2>/dev/null || true
+    if git diff --cached --quiet; then echo "nada mudou"; exit 0; fi
+    git commit -qm "save: $(date '+%F %T')" && git push -q && echo "salvo e enviado" ;;
+  restore)
+    bk="$HOME/.local/state/dotfiles-backup/$(date +%s)"; mkdir -p "$bk"
+    for p in "${PATHS[@]}"; do [ -e "$HOME_DIR/$p" ] || continue
+      [ -e "$HOME/$p" ] && { mkdir -p "$bk/$(dirname "$p")"; cp -a "$HOME/$p" "$bk/$(dirname "$p")/"; }
+      mkdir -p "$HOME/$(dirname "$p")"
+      rsync -a "${EXCL[@]}" "$HOME_DIR/$p" "$HOME/$(dirname "$p")/"; done
+    echo "restaurado (estado anterior guardado em $bk)"
+    command -v hyprctl >/dev/null && hyprctl reload >/dev/null || true ;;
+  diff)
+    for p in "${PATHS[@]}"; do diff -ru -x "*.bak*" "$HOME_DIR/$p" "$HOME/$p" 2>/dev/null || true; done ;;
+  *) echo "uso: dotfiles save|restore|diff"; exit 1 ;;
+esac

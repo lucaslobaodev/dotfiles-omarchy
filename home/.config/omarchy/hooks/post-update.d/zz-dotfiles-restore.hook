@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Depois de cada omarchy update, volta as configs para o estado salvo no repo.
+"$HOME/dotfiles/bin/dotfiles" restore
