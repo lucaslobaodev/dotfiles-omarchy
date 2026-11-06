@@ -1,4 +1,4 @@
-# dotfiles (Omarchy)
+# dotfiles-omarchy
 
 - `bin/dotfiles save` — copia as configs para `home/`, commita e dá push
 - `bin/dotfiles restore` — devolve as configs (guarda o estado atual em `~/.local/state/dotfiles-backup/`)
