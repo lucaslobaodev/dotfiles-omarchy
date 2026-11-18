@@ -27,4 +27,6 @@
   // Example: replace the default About action by reusing the same id. Existing
   // fields are kept unless overridden.
   // "about": {"icon":"","label":"About","action":"omarchy-launch-or-focus-tui \"zsh -c 'fastfetch; read -k 1'\""},
+  // TRAVA: barra fixa no topo — esconde "Position Bar" do menu (pedido do dono 2026-11-07)
+  "appearance.top-bar.position": {"icon":"","label":"Position Bar","when":"false"},
 }

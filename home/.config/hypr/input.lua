@@ -19,7 +19,7 @@ hl.config({
 
 -- Velocidade por dispositivo (negativo = mais lento).
 -- Nomes vêm de `hyprctl devices`.
-hl.device({ name = "sigmachip-usb-mouse", sensitivity = 0.1 })  -- mouse externo
+hl.device({ name = "sigmachip-usb-mouse", sensitivity = -0.15 })  -- mouse externo
 hl.device({ name = "elan06fa:00-04f3:31be-touchpad", sensitivity = 0.2 })  -- touchpad
 
 -- hl.config({

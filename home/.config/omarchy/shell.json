@@ -1,30 +1,16 @@
 {
-  "version": 1,
-  "idle": {
-    "screensaver": 0,
-    "lock": 0
-  },
   "bar": {
-    "position": "top",
-    "transparent": false,
+    "background": "none",
     "centerAnchor": "omarchy.clock",
     "layout": {
-      "left": [
-        {
-          "id": "omarchy.menu"
-        },
-        {
-          "id": "omarchy.workspaces"
-        }
-      ],
       "center": [
         {
           "id": "omarchy.indicators"
         },
         {
-          "id": "omarchy.clock",
           "format": "dddd HH:mm",
           "formatAlt": "d MMMM 'W'ww yyyy",
+          "id": "omarchy.clock",
           "verticalFormat": "HH\n—\nmm"
         },
         {
@@ -35,6 +21,16 @@
         },
         {
           "id": "omarchy.system-update"
+        }
+      ],
+      "centerBegin": [],
+      "centerEnd": [],
+      "left": [
+        {
+          "id": "omarchy.menu"
+        },
+        {
+          "id": "omarchy.workspaces"
         }
       ],
       "right": [
@@ -59,8 +55,15 @@
         {
           "id": "omarchy.power"
         }
-      ]
-    }
+      ],
+      "tray": []
+    },
+    "position": "top"
   },
-  "plugins": []
+  "idle": {
+    "lock": 0,
+    "screensaver": 0
+  },
+  "plugins": [],
+  "version": 1
 }

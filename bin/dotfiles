@@ -9,6 +9,7 @@ PATHS=(
   .config/omarchy/hooks .config/omarchy/extensions .config/omarchy/branding
   .config/foot .config/ghostty .config/kitty .config/alacritty
   .config/starship.toml .config/btop/btop.conf .config/mimeapps.list .bashrc
+  .config/wireplumber .config/pipewire
 )
 EXCL=(--exclude='*.bak*' --exclude='.git')
 cmd="${1:-diff}"

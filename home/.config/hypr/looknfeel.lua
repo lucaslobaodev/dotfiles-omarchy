@@ -55,3 +55,6 @@ o.window({ tag = "default-opacity" }, { opacity = "0.92 0.88" })
 
 -- Chrome: um pouco menos transparente que o global (0.92 / 0.88).
 o.window({ class = "^google-chrome$" }, { opacity = "0.95 0.92" })
+
+-- Chrome com a aba da Netflix ativa: totalmente opaco (vídeo sem transparência).
+o.window({ class = "^google-chrome$", title = ".*Netflix.*" }, { opacity = "1.0 override 1.0 override" })
